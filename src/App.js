@@ -1,25 +1,28 @@
 import React from 'react';
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      name: 'Ali Raza'
+    }
+  }
+
+  update(e) {
+    this.setState({name: e.target.value})
+  }
+
   render() {
-    const name = this.props.name
-    const age = this.props.age
     return (
       <div>
-        <h1>Hello {name}</h1>
-        <b>We guess your age is {age}</b>
+        <Widget update={this.update.bind(this)}/>
+        <Widget update={this.update.bind(this)}/>
+        <h1>Hello {this.state.name}</h1>
       </div>
     )
   }
 }
 
-App.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  age: React.PropTypes.number.isRequired
-}
-
-App.defaultProps = {
-  age: 34
-}
+const Widget = (props) => <input type="text" onChange={props.update} />
 
 export default App
