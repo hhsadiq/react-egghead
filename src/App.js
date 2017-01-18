@@ -1,22 +1,36 @@
 import React from 'react';
+import Button from './Button';
 
 class App extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
-      name: 'Ali Raza'
+      name: 'Ali Raza',
+      currentEvent: '---'
     }
+    this.update = this.update.bind(this)
   }
 
   update(e) {
-    this.setState({name: e.target.value})
+    this.setState({
+      name: e.target.value,
+      currentEvent: e.type
+    })
   }
 
   render() {
     return (
       <div>
-        <Widget update={this.update.bind(this)}/>
+        <Widget update={this.update}/>
         <h1>Hello {this.state.name}</h1>
+        <textarea cols="30"
+                  rows="30"
+                  onKeyPress={this.update}
+                  onKeyDown={this.update}
+                  onDoubleClick={this.update}
+        />
+        <h1>{this.state.currentEvent}</h1>
+        <Button />
       </div>
     )
   }

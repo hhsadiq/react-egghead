@@ -2,7 +2,11 @@ import React from 'react';
 
 class Button extends React.Component {
   render() {
-    return <HtmlButton>I <Heart /> learning</HtmlButton>
+    return (
+      <div>
+          <HtmlButton>I <Heart /> learning</HtmlButton>
+      </div>
+    )
   }
 }
 
@@ -10,7 +14,6 @@ const HtmlButton = (props) => <button>{props.children}</button>
 
 class Heart extends React.Component {
   render() {
-    const symbol = this.props.children;
     return <span>&hearts;</span>
   }
 }
