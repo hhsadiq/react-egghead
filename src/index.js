@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Wrapper from './Wrapper';
 
 ReactDOM.render(
-  <App />,
+  <Wrapper />,
   document.getElementById('root')
 );

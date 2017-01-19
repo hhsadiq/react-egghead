@@ -21,7 +21,12 @@ class App extends React.Component {
     })
   }
 
+  componentWillMount() {
+    console.log('App component will mount now')
+  }
+
   render() {
+    console.log('render called')
     return (
       <div>
         <Input update={this.update} ref={component => this.nameInput = component}/>
@@ -40,6 +45,14 @@ class App extends React.Component {
         <Button />
       </div>
     )
+  }
+
+  componentDidMount() {
+    console.log('App component mounted')
+  }
+
+  componentWillUnmount() {
+    console.log('App component will unmount now')
   }
 }
 
