@@ -27,8 +27,20 @@ class App extends React.Component {
     console.log('App component will mount now')
     console.log(`accessing state desc: ${this.state.desc}`)
     console.log(`accessing prop: ${this.props.interval}`)
-    this.setState({interval: this.props.interval})
+    this.setState({interval: this.props.interval}, () => {
+      this.intervalId = setInterval(() => console.log(Math.random()), this.state.interval)
+    })
   }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    console.log('componentWillReceiveProps');
+    console.log(nextProps)
+    console.log(this.state)
+    console.log(nextContext)
+    clearInterval(this.intervalId)
+    this.intervalId = setInterval(() => console.log(Math.random()), nextProps.interval)
+  }
+
 
   render() {
     console.log('render called')
@@ -55,7 +67,6 @@ class App extends React.Component {
   // we also have access to dom
   componentDidMount() {
     console.log('App component mounted')
-    this.intervalId = setInterval(() => console.log(Math.random()), this.state.interval)
     console.log(ReactDOM.findDOMNode(this))
   }
 
