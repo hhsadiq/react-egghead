@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from './Button'
 import Input from './Input'
+import ReactDOM from 'react-dom';
 
 class App extends React.Component {
   constructor() {
@@ -21,8 +22,12 @@ class App extends React.Component {
     })
   }
 
+  // we have access to prop and state and not dom
   componentWillMount() {
     console.log('App component will mount now')
+    console.log(`accessing state desc: ${this.state.desc}`)
+    console.log(`accessing prop: ${this.props.interval}`)
+    this.setState({interval: this.props.interval})
   }
 
   render() {
@@ -47,12 +52,16 @@ class App extends React.Component {
     )
   }
 
+  // we also have access to dom
   componentDidMount() {
     console.log('App component mounted')
+    this.intervalId = setInterval(() => console.log(Math.random()), this.state.interval)
+    console.log(ReactDOM.findDOMNode(this))
   }
 
   componentWillUnmount() {
     console.log('App component will unmount now')
+    clearInterval(this.intervalId)
   }
 }
 
