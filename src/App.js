@@ -27,9 +27,7 @@ class App extends React.Component {
     console.log('App component will mount now')
     console.log(`accessing state desc: ${this.state.desc}`)
     console.log(`accessing prop: ${this.props.interval}`)
-    this.setState({interval: this.props.interval}, () => {
-      this.intervalId = setInterval(() => console.log(Math.random()), this.state.interval)
-    })
+    this.setState({interval: this.props.interval})
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
@@ -37,13 +35,17 @@ class App extends React.Component {
     console.log(nextProps)
     console.log(this.state)
     console.log(nextContext)
-    clearInterval(this.intervalId)
-    this.intervalId = setInterval(() => console.log(Math.random()), nextProps.interval)
+    this.setState({interval: nextProps.interval})
   }
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return nextProps.interval < 1000
+  }
 
   render() {
     console.log('render called')
+    if (this.intervalId) clearInterval(this.intervalId)
+    this.intervalId = setInterval(() => console.log(Math.random()), this.state.interval)
     return (
       <div>
         <Input update={this.update} ref={component => this.nameInput = component}/>
@@ -74,6 +76,11 @@ class App extends React.Component {
     console.log('App component will unmount now')
     clearInterval(this.intervalId)
   }
+
+  componentDidUpdate(prevProps, prevState, prevContext) {
+    console.log(`prevInterval: ${prevProps.interval}`)
+  }
+
 }
 
 export default App

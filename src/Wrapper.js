@@ -4,7 +4,7 @@ import App from './App'
 
 class Wrapper extends React.Component {
   mount() {
-    ReactDOM.render(<App interval={50000} />, document.getElementById('app-placeholder'))
+    ReactDOM.render(<App interval={2000} />, document.getElementById('app-placeholder'))
   }
 
   unmount() {
