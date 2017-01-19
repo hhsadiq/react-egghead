@@ -1,10 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import People from './People'
 import App from './App'
 
 class Wrapper extends React.Component {
-  mount() {
-    ReactDOM.render(<App interval={2000} />, document.getElementById('app-placeholder'))
+  mount(component) {
+    ReactDOM.render(component, document.getElementById('app-placeholder'))
   }
 
   unmount() {
@@ -14,7 +15,12 @@ class Wrapper extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.mount.bind(this)}>Mount</button>
+        <button onClick={this.mount.bind(this, <App interval={2000} />)}>
+          Mount Misc stuff
+        </button>
+        <button onClick={this.mount.bind(this, <People />)}>
+          Mount people
+        </button>
         <button onClick={this.unmount.bind(this)}>UnMount</button>
         <div id="app-placeholder"></div>
       </div>
